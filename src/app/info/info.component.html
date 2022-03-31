@@ -1,0 +1,29 @@
+<h1 class="alert-heading
+
+" *ngIf="user$ | async as user" >Uygulamamıza hoş geldiniz, {{user.displayName}}</h1>
+
+<main>
+    <div class="d-flex align-items-center">
+        <div class="flex-grow-1">
+            <h1 class="page-title" >Kişiler</h1>
+            <p class="page-description">
+              Bu sayfada kişilerinizi görüntüleyebilir,güncelleyebilir,ekleyibilir ve silebilirsiniz
+           </p>
+        </div>
+
+      <app-search></app-search>
+        <button class="btn btn-success" style="margin-left: 16px" (click)="openAddInfoModal()">New Save</button>
+
+    </div>
+
+<hr>
+<div class="info">
+    <div class="row">
+        <div class="col-12 col-md-4 col-lg-3" *ngFor="let info of InfoServicService.filteredTexts">
+       <app-info-item [infoItem]="info"></app-info-item>
+        </div>
+
+
+    </div>
+</div>
+</main>

@@ -1,0 +1,57 @@
+<h2 mat-dialog-title>{{data ? 'Bilgileri Düzenle' : 'Yeni Kişi Ekle' }}</h2>
+<mat-dialog-content class="mat-typography">
+  <div *ngIf="showSpinner">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <br>
+
+  </div>
+
+  <form [formGroup]="infoForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" >
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" >
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email" >
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Phone</mat-label>
+      <input matInput formControlName="phone">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Address</mat-label>
+      <textarea matInput formControlName="address"></textarea>
+    </mat-form-field>
+    <h2>Departman</h2>
+    <mat-form-field  formControlName="departman" appearance="fill">
+      <mat-select>
+        <mat-option *ngFor="let Departman of deps" [value]="Departman.value">
+          {{Departman.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-radio-group aria-label="Select an option">
+      <h2>Cinsiyet</h2>
+      <mat-radio-button value="1">Erkek</mat-radio-button>
+      <mat-radio-button value="2">Kız</mat-radio-button>
+    </mat-radio-group>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <div class="flex-grow-1 text-start" *ngIf="data">
+    <button mat-stroked-button color="warn" (click)="deleteCard()  "[disabled]="infoForm.invalid || showSpinner">Sil</button>
+  </div>
+  <div>
+    <button mat-raised-button mat-dialog-close color="warn">Vazgeç</button>
+    <button mat-raised-button color="primary" (click)="data ? updateCard() : addInfo()" [disabled]="infoForm.invalid || showSpinner ">{{data ? 'Düzenle' : 'Ekle'}}</button>
+  </div>
+
+</mat-dialog-actions>
+
+
